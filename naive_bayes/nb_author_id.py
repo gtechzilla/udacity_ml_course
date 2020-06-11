@@ -26,7 +26,22 @@ features_train, features_test, labels_train, labels_test = preprocess()
 
 #########################################################
 ### your code goes here ###
+def classifier(features_train,features_test,labels_train,labels_test):
+    from sklearn.naive_bayes import GaussianNB
+    clf= GaussianNB()
+    t0 = time()
+    clf.fit(features_train,labels_train)
+    print "training time:", round(time()-t0, 3), "s"
+    t1 = time()
+    predicted = clf.predict(features_test)
+    print "Prediction time:", round(time()-t1, 3), "s"
+    from sklearn.metrics import accuracy_score
+    accuracy = accuracy_score(labels_test,predicted)
+    print"The accuracy of Naive Bayes is ",accuracy
+    return predicted
 
+
+classifier(features_train, features_test, labels_train, labels_test)
 
 #########################################################
 
